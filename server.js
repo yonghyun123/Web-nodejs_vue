@@ -1,11 +1,18 @@
+var connect = require('connect');
 var http = require('http');
 
-function onCreate(request, response){
-    console.log("사용자가 request합니다"+request.url);
-    response.writeHead(200,{"Context-Type": "text/plan" });
-    response.write("this is server response(data....)");
-    response.end();
-}
+var app = connect();
 
-http.createServer(onCreate).listen(8080);
-console.log("launching server");
+function about(request, response){
+    console.log("about 페이지를 요청했습니다.");
+    
+}
+function email(request,response){
+    console.log("email 페이지를 요청했습니다");
+}
+app.use('/about', about);
+app.use('/email', email);
+
+http.createServer(app).listen(8080);
+console.log("server launching...");
+
